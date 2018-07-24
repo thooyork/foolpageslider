@@ -14,8 +14,11 @@ Options
 -------
 
 <pre>
-  Initialize with:
-   &lt;script&gt;
-        foolpageslider.module.init();
-    &lt;/script&gt;
+Initialize with:
+&lt;script&gt;
+    foolpageslider.module.init();
+&lt;/script&gt;
+
+Set initial slide with data attribute:
+&lt;div class="fps-container" data-settings='{"initialSlide":1}'&gt;
 </pre>
