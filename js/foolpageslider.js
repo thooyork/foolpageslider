@@ -115,7 +115,6 @@ foolpageslider.module = (function(){
         setImages();
         bindEvents(); 
         
-        //setSlide(slide, false);
         setSlideTween(slide, false);
        
     };

@@ -95,6 +95,7 @@
     color:rgba(255,255,255, .5);
     text-decoration: none;
     font-size:18px;
+    font-weight:200;
     padding:20px 0px 20px 40px;
     width:calc(100% - 40px);
   }
@@ -182,11 +183,26 @@
 
     .fps-container nav ul li a,
     .fps-container nav ul li a:hover{
+      position:relative;
+      background-image:none;
+      /*
       background-image:url('../assets/plus.svg');
       background-repeat: no-repeat;
       background-position: 95% center;
       background-size:35px;
+      */
       font-size:20px;
+    }
+
+    .fps-container nav ul li a:after{
+      position: absolute;
+      transition:.5s ease-in-out;
+      content:url('../assets/plus.svg');
+      width:35px;
+      height:35px;
+      display:block;
+      right:20px;
+      top:15px;
     }
 
     .fps-container nav ul li a:hover{
@@ -195,11 +211,26 @@
 
     .fps-container nav ul li.active a,
     .fps-container nav ul li.active a:hover{
+      background-image:none;
+      /*
       background-image:url('../assets/cross.svg');
       background-repeat: no-repeat;
       background-position: 95% center;
       background-size:35px;
+      */
       background-color:rgba(255,255,255,.125);
+    }
+
+    .fps-container nav ul li.active a:after{
+      position: absolute;
+      transition:.5s ease-in-out;;
+      content:url('../assets/plus.svg');
+      transform:rotate(45deg);
+      width:35px;
+      height:35px;
+      display:block;
+      right:20px;
+      top:15px;
     }
 
     .fps-container .bgitem .content{
