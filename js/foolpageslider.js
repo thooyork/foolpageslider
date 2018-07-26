@@ -36,6 +36,7 @@ foolpageslider.module = (function(){
             ww = $(window).width();
             resizeTimer = setTimeout(function() {
                // do stuff here
+               setSlideTween(currentBG, false);
             }, 250); 
         });
 
@@ -47,7 +48,7 @@ foolpageslider.module = (function(){
                 yPos = -yPos;
                 TweenLite.to($(cssContainer), 0.6, {rotationY: 5*xPos, rotationX: 5*yPos, ease:Power1.easeOut, transformPerspective:2500, transformOrigin:'center'});
             });
-            
+
         }
 
     };
@@ -70,41 +71,43 @@ foolpageslider.module = (function(){
                 // Slide in from BOTTOM
                 TweenLite.set(newItem, {top:'100%'});
                 TweenLite.set(newContent, {top:'100%', autoAlpha:0});
+                TweenLite.set(newHeadline, {top:0});
 
                 var tl = new TimelineLite();
                     tl.to(currentContent, 0.8, {top:"-100%", autoAlpha:0})
                     .to(currentItem, 1, {top:"-100%", autoAlpha:0.1}, "-=0.7")
                     .to(newItem, 0.6,{top:0, autoAlpha:1}, "-=1")
-                    .to(newContent, 0.8, {top:'40%', autoAlpha:0.5}, "-=1")
+                    .to(newHeadline, 0.7, {top:'-'+newHeadline.height()}, "-=0.5")
+                    .to(newContent, 0.8, {top:'55%', autoAlpha:0.5}, "-=1")
                     .to(newContent, 0.5, {autoAlpha:1}, "-=0.3");
             }
             else if (id < currentBG) {
                 //Slide in from TOP
                 TweenLite.set(newItem, {top:'-100%'});
                 TweenLite.set(newContent, {top:'-100%', autoAlpha:0});
+                TweenLite.set(newHeadline, {top:'-'+ (newHeadline.height() * 3)});
 
                 var tl = new TimelineLite();
                     tl.to(currentContent, 0.8, {top:"100%", autoAlpha:0})
                     .to(currentItem, 1, {top:"100%", autoAlpha:0.1}, "-=0.7")
                     .to(newItem, 0.6,{top:0, autoAlpha:1}, "-=1")
-                    .to(newContent, 0.8, {top:'40%', autoAlpha:0.5}, "-=1")
+                    .to(newHeadline, 0.7, {top:'-'+newHeadline.height()}, "-=0.5")
+                    .to(newContent, 0.8, {top:'55%', autoAlpha:0.5}, "-=1")
                     .to(newContent, 0.5, {autoAlpha:1}, "-=0.3");
             }
         }
         else{
             // set Image w/o Animation e.g. on pageload
-            //newItem.css({'top':'0','opacity':1});
             TweenLite.set(newItem, {top:0, autoAlpha:1});
             
             var tl = new TimelineLite();
                 tl.to(newItem, 1,{top:0, autoAlpha:1})
-                  .to(newContent, 0.8, {top:'40%', autoAlpha:0.5}, "-=1")
+                  .to(newHeadline, 0.6, {top:'-'+newHeadline.height()}, "-=0.9")
+                  .to(newContent, 0.8, {top:'55%', autoAlpha:0.5}, "-=1")
                   .to(newContent, 0.5, {autoAlpha:1}, "-=0.3");
             
             TweenLite.set($(cssLink), {className:'-=active'});
             TweenLite.set($(cssLink + '[data-id="'+id+'"]'), {className:'+=active'});
-            //$(cssLink).removeClass('active');
-            //$(cssLink + '[data-id="'+id+'"]').addClass('active');
         }
         
         currentBG = id;

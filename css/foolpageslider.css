@@ -150,7 +150,7 @@
   }
 
   .fps-container .bgitem .content h2{
-    position:relative;
+    position:absolute;
     /*border:1px solid red;*/
     font-weight:100;
     font-size:60px;
@@ -237,6 +237,10 @@
 
     .fps-container .bgitem .content{
       display:none;
+    }
+
+    .fps-container .bgitem .content h2{
+      top:-100px;
     }
 
     .fps-container .m .content{
