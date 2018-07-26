@@ -36,12 +36,21 @@ foolpageslider.module = (function(){
             ww = $(window).width();
             resizeTimer = setTimeout(function() {
                // do stuff here
-            }, 250);
-            
+            }, 250); 
         });
-    };
 
-   
+        if($(cssContainer).data("settings").tiltEffect){
+
+            $(document).on('mousemove', function(e){
+                var xPos = (e.clientX / $(window).width())-0.5;
+                var yPos = (e.clientY / $(window).height())-0.5;
+                yPos = -yPos;
+                TweenLite.to($(cssContainer), 0.6, {rotationY: 5*xPos, rotationX: 5*yPos, ease:Power1.easeOut, transformPerspective:2500, transformOrigin:'center'});
+            });
+            
+        }
+
+    };
 
     var setSlideTween = function(id, boolAnimate){
 
@@ -59,39 +68,43 @@ foolpageslider.module = (function(){
         if (boolAnimate){ 
             if(id > currentBG){
                 // Slide in from BOTTOM
-                newItem.css('top','100%');
-                newContent.css({'top':'180%','opacity':0});
+                TweenLite.set(newItem, {top:'100%'});
+                TweenLite.set(newContent, {top:'100%', autoAlpha:0});
 
                 var tl = new TimelineLite();
-                    tl.to(currentContent, 0.8, {top:"-100%", opacity:0})
-                    .to(currentItem, 1, {top:"-100%", opacity:0.1}, "-=0.7")
-                    .to(newItem, 0.6,{top:0, opacity:1}, "-=1")
-                    .to(newContent, 0.8, {top:'40%', opacity:0.5}, "-=1")
-                    .to(newContent, 0.5, {opacity:1}, "-=0.3");
+                    tl.to(currentContent, 0.8, {top:"-100%", autoAlpha:0})
+                    .to(currentItem, 1, {top:"-100%", autoAlpha:0.1}, "-=0.7")
+                    .to(newItem, 0.6,{top:0, autoAlpha:1}, "-=1")
+                    .to(newContent, 0.8, {top:'40%', autoAlpha:0.5}, "-=1")
+                    .to(newContent, 0.5, {autoAlpha:1}, "-=0.3");
             }
             else if (id < currentBG) {
                 //Slide in from TOP
-                newItem.css('top','-100%');
-                newContent.css({'top':'-100%','opacity':0});
+                TweenLite.set(newItem, {top:'-100%'});
+                TweenLite.set(newContent, {top:'-100%', autoAlpha:0});
+
                 var tl = new TimelineLite();
-                    tl.to(currentContent, 0.8, {top:"100%", opacity:0})
-                    .to(currentItem, 1, {top:"100%", opacity:0.1}, "-=0.7")
-                    .to(newItem, 0.6,{top:0, opacity:1}, "-=1")
-                    .to(newContent, 0.8, {top:'40%', opacity:0.5}, "-=1")
-                    .to(newContent, 0.5, {opacity:1}, "-=0.3");
+                    tl.to(currentContent, 0.8, {top:"100%", autoAlpha:0})
+                    .to(currentItem, 1, {top:"100%", autoAlpha:0.1}, "-=0.7")
+                    .to(newItem, 0.6,{top:0, autoAlpha:1}, "-=1")
+                    .to(newContent, 0.8, {top:'40%', autoAlpha:0.5}, "-=1")
+                    .to(newContent, 0.5, {autoAlpha:1}, "-=0.3");
             }
         }
         else{
             // set Image w/o Animation e.g. on pageload
-            newItem.css({'top':'0','opacity':1});
-
-            var tl = new TimelineLite();
-                tl.to(newItem, 1,{top:0, opacity:1})
-                .to(newContent, 0.8, {top:'40%', opacity:0.5}, "-=1")
-                .to(newContent, 0.5, {opacity:1}, "-=0.3");
+            //newItem.css({'top':'0','opacity':1});
+            TweenLite.set(newItem, {top:0, autoAlpha:1});
             
-            $(cssLink).removeClass('active');
-            $(cssLink + '[data-id="'+id+'"]').addClass('active');
+            var tl = new TimelineLite();
+                tl.to(newItem, 1,{top:0, autoAlpha:1})
+                  .to(newContent, 0.8, {top:'40%', autoAlpha:0.5}, "-=1")
+                  .to(newContent, 0.5, {autoAlpha:1}, "-=0.3");
+            
+            TweenLite.set($(cssLink), {className:'-=active'});
+            TweenLite.set($(cssLink + '[data-id="'+id+'"]'), {className:'+=active'});
+            //$(cssLink).removeClass('active');
+            //$(cssLink + '[data-id="'+id+'"]').addClass('active');
         }
         
         currentBG = id;
