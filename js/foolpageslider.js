@@ -7,7 +7,7 @@ foolpageslider.module = (function(){
     var currentBG = 0;
     var resizeTimer;
     var ww = $(window).width();
-    var bp = 768;
+    var bp = 850;
 
     var setImages = function(){
         $(cssItem).each(function(idx, val){

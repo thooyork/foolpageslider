@@ -165,7 +165,7 @@
   /* MOBILE VIEW  */
   /* ----------------------------------------------------------------- */
 
-  @media screen and (max-width:768px){
+  @media screen and (max-width:850px){
 
     .fps-container nav{
       left:0;
