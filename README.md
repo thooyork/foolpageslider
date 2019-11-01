@@ -1,6 +1,8 @@
 foolpageSlider
 ==============
 
+![foolpageslider](screenshot_foolpageslider.png?raw=true "foolpageslider")
+
 a fully responsive fullpage background image and text slider.
 
 <a href="http://www.smart-sign.com/foolpageslider">visit the demo</a>
